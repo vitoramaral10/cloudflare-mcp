@@ -1,0 +1,15 @@
+# Binaries
+/cloudflare-mcp
+/cloudflare-mcp-*
+*.exe
+
+# Vector cache written by CACHE_DIR when it points inside the repo
+/cache/
+
+# Site
+docs/node_modules
+docs/.vitepress/dist
+docs/.vitepress/cache
+
+# Local notes
+TASKS.md

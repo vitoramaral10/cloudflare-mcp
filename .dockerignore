@@ -1,0 +1,6 @@
+.git
+docs
+scripts
+cache
+/cloudflare-mcp
+/cloudflare-mcp-*
