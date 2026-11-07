@@ -1,0 +1,33 @@
+name: Bug report
+description: Something does not work as documented.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. Please never paste API tokens, bearer secrets or account IDs you want to keep private.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: The tool you called, the arguments (redacted), and what came back.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Image tag or commit, e.g. v0.7.0.
+    validations:
+      required: true
+  - type: textarea
+    id: setup
+    attributes:
+      label: Setup
+      description: MCP client, gateway (if any), whether EMBED_URL is set.

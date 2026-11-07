@@ -1,0 +1,27 @@
+name: find missed an operation
+description: find did not return the operation you needed.
+labels: [search]
+body:
+  - type: input
+    id: query
+    attributes:
+      label: Query
+      description: Exactly what was passed to find.
+    validations:
+      required: true
+  - type: input
+    id: expected
+    attributes:
+      label: Operation you expected
+      description: Its tool name, e.g. email_routing_rules_catch_all_update.
+    validations:
+      required: true
+  - type: textarea
+    id: got
+    attributes:
+      label: What find returned
+  - type: dropdown
+    id: mode
+    attributes:
+      label: Search mode in the result
+      options: [hybrid, keyword]
