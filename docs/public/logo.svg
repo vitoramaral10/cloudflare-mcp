@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="t">
+  <title id="t">cloudflare-mcp logo: a cloud outline holding API braces</title>
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7c6dff"/>
+      <stop offset="1" stop-color="#2fc8f0"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="28" fill="#111733"/>
+  <path d="M34 92 H93 A19 19 0 0 0 96.5 54.4 A28 28 0 0 0 43 50.5 A21 21 0 0 0 34 92 Z"
+        fill="none" stroke="url(#g)" stroke-width="7" stroke-linejoin="round"/>
+  <g fill="none" stroke="#e8ecff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M58 60 Q51 60 51 66 V68 Q51 72 47 72 Q51 72 51 76 V78 Q51 84 58 84"/>
+    <path d="M74 60 Q81 60 81 66 V68 Q81 72 85 72 Q81 72 81 76 V78 Q81 84 74 84"/>
+  </g>
+  <circle cx="66" cy="72" r="3.6" fill="#2fc8f0"/>
+</svg>

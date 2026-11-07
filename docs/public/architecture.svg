@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 560" width="1040" height="560" role="img" aria-labelledby="t d">
+  <title id="t">cloudflare-mcp architecture</title>
+  <desc id="d">An MCP client calls cloudflare-mcp, optionally through a gateway. The server exposes one tool per Cloudflare API operation plus find, call, tunnel and request tools, and calls the Cloudflare API v4. find ranks operations with an embedding server and a vector cache. At build time the OpenAPI spec and LLM-written Portuguese texts become the embedded catalog.</desc>
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7c6dff"/>
+      <stop offset="1" stop-color="#2fc8f0"/>
+    </linearGradient>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#8f9ad6"/>
+    </marker>
+  </defs>
+  <rect width="1040" height="560" rx="18" fill="#0d1230"/>
+
+  <g font-family="Inter, 'DejaVu Sans', Arial, sans-serif">
+    <!-- runtime lane label -->
+    <text x="32" y="44" fill="#7681b8" font-size="15" font-weight="600" letter-spacing="1.5">RUNTIME</text>
+
+    <!-- client -->
+    <rect x="32" y="70" width="190" height="96" rx="12" fill="#161d45" stroke="#34408a"/>
+    <text x="127" y="108" fill="#eef1ff" font-size="18" font-weight="700" text-anchor="middle">MCP client</text>
+    <text x="127" y="134" fill="#aeb7e6" font-size="14" text-anchor="middle">Claude, ChatGPT, IDEs…</text>
+
+    <!-- gateway -->
+    <rect x="262" y="70" width="190" height="96" rx="12" fill="#161d45" stroke="#34408a" stroke-dasharray="6 5"/>
+    <text x="357" y="108" fill="#eef1ff" font-size="18" font-weight="700" text-anchor="middle">Gateway</text>
+    <text x="357" y="134" fill="#aeb7e6" font-size="14" text-anchor="middle">optional: OAuth, filters</text>
+
+    <!-- server -->
+    <rect x="492" y="58" width="300" height="250" rx="14" fill="#141a3f" stroke="url(#g)" stroke-width="2.5"/>
+    <text x="642" y="92" fill="#ffffff" font-size="20" font-weight="700" text-anchor="middle">cloudflare-mcp</text>
+    <g font-size="14">
+      <rect x="512" y="108" width="260" height="40" rx="8" fill="#1d2557"/>
+      <text x="642" y="133" fill="#dfe4ff" text-anchor="middle">3,777 operation tools (from the spec)</text>
+      <rect x="512" y="156" width="260" height="40" rx="8" fill="#1d2557"/>
+      <text x="642" y="181" fill="#dfe4ff" text-anchor="middle">find → call  (search the whole API)</text>
+      <rect x="512" y="204" width="260" height="40" rx="8" fill="#1d2557"/>
+      <text x="642" y="229" fill="#dfe4ff" text-anchor="middle">tunnel_route_add / _remove</text>
+      <rect x="512" y="252" width="260" height="40" rx="8" fill="#1d2557"/>
+      <text x="642" y="277" fill="#dfe4ff" text-anchor="middle">api_request (anything else)</text>
+    </g>
+
+    <!-- cloudflare api -->
+    <rect x="832" y="70" width="176" height="96" rx="12" fill="#161d45" stroke="#34408a"/>
+    <text x="920" y="108" fill="#eef1ff" font-size="18" font-weight="700" text-anchor="middle">Cloudflare</text>
+    <text x="920" y="134" fill="#aeb7e6" font-size="14" text-anchor="middle">API v4 (your token)</text>
+
+    <!-- embed + cache -->
+    <rect x="832" y="208" width="176" height="96" rx="12" fill="#161d45" stroke="#34408a" stroke-dasharray="6 5"/>
+    <text x="920" y="244" fill="#eef1ff" font-size="17" font-weight="700" text-anchor="middle">Embeddings</text>
+    <text x="920" y="268" fill="#aeb7e6" font-size="13.5" text-anchor="middle">/v1/embeddings (bge-m3)</text>
+    <text x="920" y="288" fill="#aeb7e6" font-size="13.5" text-anchor="middle">optional + vector cache</text>
+
+    <!-- arrows runtime -->
+    <g stroke="#8f9ad6" stroke-width="2.2" fill="none" marker-end="url(#a)">
+      <path d="M222 118 H258"/>
+      <path d="M452 118 H488"/>
+      <path d="M792 118 H828"/>
+      <path d="M792 228 Q812 228 812 248 Q812 256 828 256"/>
+    </g>
+
+    <!-- build lane -->
+    <line x1="32" y1="350" x2="1008" y2="350" stroke="#232b5c" stroke-dasharray="4 6"/>
+    <text x="32" y="384" fill="#7681b8" font-size="15" font-weight="600" letter-spacing="1.5">BUILD TIME</text>
+
+    <rect x="32" y="406" width="230" height="110" rx="12" fill="#161d45" stroke="#34408a"/>
+    <text x="147" y="444" fill="#eef1ff" font-size="17" font-weight="700" text-anchor="middle">OpenAPI spec</text>
+    <text x="147" y="470" fill="#aeb7e6" font-size="13.5" text-anchor="middle">cloudflare/api-schemas</text>
+    <text x="147" y="492" fill="#aeb7e6" font-size="13.5" text-anchor="middle">(BSD-3-Clause)</text>
+
+    <rect x="302" y="406" width="230" height="110" rx="12" fill="#161d45" stroke="#34408a"/>
+    <text x="417" y="444" fill="#eef1ff" font-size="17" font-weight="700" text-anchor="middle">Portuguese texts</text>
+    <text x="417" y="470" fill="#aeb7e6" font-size="13.5" text-anchor="middle">1 description + 5 requests</text>
+    <text x="417" y="492" fill="#aeb7e6" font-size="13.5" text-anchor="middle">per operation (LLM-written)</text>
+
+    <rect x="572" y="420" width="190" height="82" rx="12" fill="#1d2557" stroke="url(#g)" stroke-width="1.6"/>
+    <text x="667" y="455" fill="#ffffff" font-size="15.5" font-weight="700" text-anchor="middle">cloudflare-mcp-</text>
+    <text x="667" y="477" fill="#ffffff" font-size="15.5" font-weight="700" text-anchor="middle">catalog</text>
+
+    <rect x="802" y="420" width="206" height="82" rx="12" fill="#161d45" stroke="#34408a"/>
+    <text x="905" y="455" fill="#eef1ff" font-size="15.5" font-weight="700" text-anchor="middle">catalog.json.gz</text>
+    <text x="905" y="478" fill="#aeb7e6" font-size="13.5" text-anchor="middle">embedded in the binary</text>
+
+    <g stroke="#8f9ad6" stroke-width="2.2" fill="none" marker-end="url(#a)">
+      <path d="M262 461 H298"/>
+      <path d="M532 461 H568"/>
+      <path d="M762 461 H798"/>
+      <path d="M147 406 V392 H667 V416"/>
+      <path d="M905 420 V318 H800" stroke-dasharray="5 5"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,42 @@
+# Example: cloudflare-mcp with a local embedding server for find.
+#
+#   cp docker-compose.example.yml docker-compose.yml
+#   echo "CLOUDFLARE_API_TOKEN=..." > .env
+#   echo "MCP_BEARER=$(openssl rand -hex 32)" >> .env
+#   mkdir -p models cache && curl -L -o models/bge-m3-Q6_K.gguf \
+#     https://huggingface.co/gpustack/bge-m3-GGUF/resolve/main/bge-m3-Q6_K.gguf
+#   docker compose up -d
+#
+# The first start embeds ~22,700 texts (about 40 minutes on a laptop CPU); find answers by
+# keyword meanwhile. The vectors are cached in ./cache, so later starts take seconds.
+
+services:
+  cloudflare-mcp:
+    image: ghcr.io/vitoramaral10/cloudflare-mcp:latest
+    restart: unless-stopped
+    user: "1000:1000"
+    ports:
+      - "127.0.0.1:8080:8080"
+    environment:
+      CLOUDFLARE_API_TOKEN: ${CLOUDFLARE_API_TOKEN}
+      # CLOUDFLARE_ACCOUNT_ID: ""   # needed only if the token sees more than one account
+      MCP_BEARER: ${MCP_BEARER}
+      EMBED_URL: http://embed:8080
+      CACHE_DIR: /cache
+      GOMEMLIMIT: 384MiB
+    volumes:
+      - ./cache:/cache
+    mem_limit: 448m
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    depends_on: [embed]
+
+  embed:
+    image: ghcr.io/ggml-org/llama.cpp:server
+    restart: unless-stopped
+    command: ["-m", "/models/bge-m3-Q6_K.gguf", "--embedding", "--pooling", "cls",
+              "-c", "8192", "-np", "8", "-b", "1024", "-ub", "1024",
+              "--alias", "bge-m3", "--host", "0.0.0.0", "--port", "8080"]
+    volumes:
+      - ./models:/models:ro
